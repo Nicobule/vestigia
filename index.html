@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vestigia</title>
+<style>
+  :root {
+    --nero: #0a0a0c;
+    --nero-pannello: #131316;
+    --crema: #ece7dc;
+    --crema-tenue: #8a8781;
+    --arancio: #ff7a2e;
+    --arancio-glow: #ff7a2eaa;
+    --blu: #3f6fff;
+    --blu-glow: #3f6fffaa;
+    --linea: #232327;
+  }
+ 
+  * { box-sizing: border-box; }
+ 
+  body {
+    margin: 0;
+    background: var(--nero);
+    color: var(--crema);
+    font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+ 
+  .sans {
+    font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+ 
+  section {
+    padding: 7rem 8vw;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+ 
+  /* --- HERO --- */
+  .hero {
+    min-height: 92vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+ 
+  .sfondo-sagome {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    overflow: hidden;
+  }
+ 
+  .sagoma {
+    position: absolute;
+    border-radius: 50% 45% 55% 48% / 55% 50% 48% 45%;
+    filter: blur(40px);
+    opacity: 0;
+    mix-blend-mode: screen;
+  }
+ 
+  .sagoma.arancio { background: radial-gradient(circle, var(--arancio) 0%, transparent 70%); }
+  .sagoma.blu { background: radial-gradient(circle, var(--blu) 0%, transparent 70%); }
+ 
+  .s1 { width: 26vw; height: 40vh; top: 8%;  left: 6%;  animation: dissolvi-1 22s ease-in-out infinite; }
+  .s2 { width: 20vw; height: 32vh; top: 45%; left: 62%; animation: dissolvi-2 26s ease-in-out infinite; animation-delay: 3s; }
+  .s3 { width: 16vw; height: 28vh; top: 18%; left: 72%; animation: dissolvi-3 19s ease-in-out infinite; animation-delay: 7s; }
+  .s4 { width: 22vw; height: 34vh; top: 55%; left: 12%; animation: dissolvi-1 28s ease-in-out infinite reverse; animation-delay: 11s; }
+  .s5 { width: 14vw; height: 22vh; top: 5%;  left: 40%; animation: dissolvi-2 21s ease-in-out infinite; animation-delay: 5s; }
+ 
+  @keyframes dissolvi-1 {
+    0%   { opacity: 0;    transform: translate(0, 0)          scale(0.9); }
+    18%  { opacity: 0.35; transform: translate(20vw, 10vh)    scale(1);   }
+    38%  { opacity: 0.1;  transform: translate(35vw, -15vh)   scale(1.1); }
+    58%  { opacity: 0.3;  transform: translate(10vw, 20vh)    scale(0.95);}
+    78%  { opacity: 0.15; transform: translate(-15vw, 5vh)    scale(1.05);}
+    100% { opacity: 0;    transform: translate(0, 0)          scale(0.9); }
+  }
+ 
+  @keyframes dissolvi-2 {
+    0%   { opacity: 0;    transform: translate(0, 0)          scale(1);   }
+    22%  { opacity: 0.28; transform: translate(-25vw, 15vh)   scale(1.08);}
+    45%  { opacity: 0.38; transform: translate(-40vw, -10vh)  scale(0.92);}
+    68%  { opacity: 0.18; transform: translate(-18vw, -25vh)  scale(1);   }
+    88%  { opacity: 0.3;  transform: translate(5vw, 8vh)      scale(0.96);}
+    100% { opacity: 0;    transform: translate(0, 0)          scale(1);   }
+  }
+ 
+  @keyframes dissolvi-3 {
+    0%   { opacity: 0;    transform: translate(0, 0)          scale(0.95);}
+    25%  { opacity: 0.2;  transform: translate(-30vw, 25vh)   scale(1.1); }
+    50%  { opacity: 0.32; transform: translate(-45vw, 5vh)    scale(0.9); }
+    75%  { opacity: 0.16; transform: translate(-20vw, -20vh)  scale(1.05);}
+    100% { opacity: 0;    transform: translate(0, 0)          scale(0.95);}
+  }
+ 
+  .hero .etichetta {
+    font-family: -apple-system, "Segoe UI", sans-serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.08em;
+    color: var(--crema-tenue);
+    margin-bottom: 1.5rem;
+    position: relative;
+    z-index: 2;
+  }
+ 
+  .hero h1 {
+    font-size: clamp(2.6rem, 11vw, 8rem);
+    margin: 0;
+    padding-bottom: 0.15em;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    background: linear-gradient(120deg, var(--arancio) 0%, var(--crema) 45%, var(--blu) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    position: relative;
+    z-index: 2;
+    opacity: 0.16;
+    mix-blend-mode: screen;
+  }
+ 
+  .hero .sottotitolo {
+    max-width: 34rem;
+    font-size: 1.15rem;
+    color: var(--crema-tenue);
+    margin-top: 2rem;
+    position: relative;
+    z-index: 2;
+  }
+ 
+  .hero .meta {
+    margin-top: 3.5rem;
+    font-family: -apple-system, "Segoe UI", sans-serif;
+    font-size: 0.85rem;
+    color: var(--crema-tenue);
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 2;
+  }
+ 
+  /* --- CONCETTO --- */
+  .concetto p {
+    font-size: 1.25rem;
+    max-width: 42rem;
+    color: #d8d3c8;
+  }
+ 
+  .concetto strong {
+    color: var(--crema);
+    font-weight: 600;
+  }
+ 
+  /* --- SCHERMATA (video) --- */
+  .schermata {
+    background: var(--nero-pannello);
+    border: 1px solid var(--linea);
+    border-radius: 4px;
+    padding: 2rem;
+  }
+ 
+  .schermata h2 {
+    font-family: -apple-system, "Segoe UI", sans-serif;
+    font-weight: 600;
+    font-size: 1.1rem;
+    margin-top: 0;
+  }
+ 
+  video {
+    width: 100%;
+    display: block;
+    border-radius: 2px;
+    background: #000;
+  }
+ 
+  .nota-video {
+    font-family: -apple-system, "Segoe UI", sans-serif;
+    font-size: 0.85rem;
+    color: var(--crema-tenue);
+    margin-top: 1rem;
+  }
+ 
+  /* --- GALLERIE --- */
+  .titolo-sezione {
+    font-family: -apple-system, "Segoe UI", sans-serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.08em;
+    color: var(--crema-tenue);
+    margin-bottom: 0.6rem;
+  }
+ 
+  .sezione-giorno .titolo-sezione { color: var(--arancio); }
+  .sezione-notte .titolo-sezione { color: var(--blu); }
+ 
+  h2.titolo-grande {
+    font-size: 2.2rem;
+    font-weight: 400;
+    margin-top: 0;
+    margin-bottom: 3rem;
+  }
+ 
+  .griglia {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1rem;
+  }
+ 
+  .griglia figure {
+    margin: 0;
+    overflow: hidden;
+    border-radius: 3px;
+    border: 1px solid var(--linea);
+  }
+ 
+  .griglia img {
+    width: 100%;
+    display: block;
+    aspect-ratio: 4/3;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+    cursor: pointer;
+  }
+ 
+  .griglia figure:hover img {
+    transform: scale(1.04);
+  }
+ 
+  .griglia figcaption {
+    font-family: -apple-system, "Segoe UI", sans-serif;
+    font-size: 0.75rem;
+    color: var(--crema-tenue);
+    padding: 0.5rem 0.7rem;
+  }
+ 
+  .sezione-notte {
+    background: linear-gradient(180deg, transparent, #0d1224 40%, #0d1224 60%, transparent);
+  }
+ 
+  /* --- CHIUSURA --- */
+  footer {
+    padding: 5rem 8vw 4rem;
+    border-top: 1px solid var(--linea);
+    font-family: -apple-system, "Segoe UI", sans-serif;
+    font-size: 0.85rem;
+    color: var(--crema-tenue);
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+ 
+  @media (max-width: 640px) {
+    section { padding: 4.5rem 6vw; }
+    footer { padding: 3rem 6vw; flex-direction: column; }
+    .hero { min-height: 100svh; padding-top: 3rem; }
+    .hero .meta { gap: 1rem 1.5rem; font-size: 0.78rem; }
+    .schermata { padding: 1.2rem; }
+    .griglia { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 0.6rem; }
+    h2.titolo-grande { font-size: 1.6rem; margin-bottom: 2rem; }
+    .s1, .s2, .s3, .s4, .s5 { width: 60vw; height: 26vh; filter: blur(28px); }
+  }
+ 
+  @media (max-width: 400px) {
+    .hero .etichetta { font-size: 0.7rem; }
+    .hero .sottotitolo { font-size: 1rem; }
+  }
+ 
+  @media (min-width: 641px) and (max-width: 1024px) {
+    section { padding: 6rem 7vw; }
+    .griglia { grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); }
+  }
+ 
+  @media (hover: none) {
+    .griglia figure:hover img { transform: none; }
+  }
+ 
+  /* --- CURSORE OMBRA (solo mouse/desktop) --- */
+  #cursore-ombra {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: #ffffff;
+    filter: blur(4px);
+    mix-blend-mode: difference;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: width 0.35s cubic-bezier(0.2, 0.8, 0.2, 1),
+                height 0.35s cubic-bezier(0.2, 0.8, 0.2, 1),
+                filter 0.35s ease,
+                opacity 0.3s ease;
+    opacity: 0;
+  }
+ 
+  #cursore-ombra.attivo { opacity: 0.85; }
+ 
+  #cursore-ombra.grande {
+    width: 42px;
+    height: 42px;
+    filter: blur(7px);
+  }
+ 
+  body.cursore-personalizzato,
+  body.cursore-personalizzato a,
+  body.cursore-personalizzato button {
+    cursor: none;
+  }
+ 
+  /* --- LIGHTBOX (ingrandimento immagini) --- */
+  #lightbox {
+    position: fixed;
+    inset: 0;
+    background: rgba(6, 6, 8, 0.94);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    padding: 4vh 4vw;
+    opacity: 0;
+    transition: opacity 0.25s ease;
+  }
+ 
+  #lightbox.aperto {
+    display: flex;
+    opacity: 1;
+  }
+ 
+  #lightbox img {
+    max-width: 92vw;
+    max-height: 88vh;
+    object-fit: contain;
+    border-radius: 3px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+  }
+ 
+  #lightbox .chiudi {
+    position: fixed;
+    top: 2rem;
+    right: 2.5rem;
+    font-family: -apple-system, "Segoe UI", sans-serif;
+    font-size: 1rem;
+    color: var(--crema-tenue);
+    background: none;
+    border: 1px solid var(--linea);
+    border-radius: 50%;
+    width: 42px;
+    height: 42px;
+    cursor: pointer;
+  }
+ 
+  #lightbox .chiudi:hover {
+    color: var(--crema);
+    border-color: var(--crema-tenue);
+  }
+</style>
+</head>
+<body>
+ 
+  <section class="hero">
+    <div class="sfondo-sagome">
+      <div class="sagoma arancio s1"></div>
+      <div class="sagoma blu s2"></div>
+      <div class="sagoma arancio s3"></div>
+      <div class="sagoma blu s4"></div>
+      <div class="sagoma arancio s5"></div>
+    </div>
+    <div class="etichetta sans">INSTALLAZIONE GENERATIVA — SENSORI DI MOVIMENTO E COMPUTER VISION</div>
+    <h1>Vestigia</h1>
+    <p class="sottotitolo">
+      Ogni passaggio lascia un'impronta. Il tempo di una giornata,
+      misurato attraverso le tracce di chi ha attraversato lo spazio.
+    </p>
+    <div class="meta">
+      <span>2026</span>
+      <span>Nicolò Bulegato</span>
+      <span>Python · OpenCV · RTSP</span>
+      <span>Telecamera IP · rilevamento background subtraction</span>
+    </div>
+  </section>
+ 
+  <section class="concetto">
+    <div class="titolo-sezione sans">CONCETTO</div>
+    <p>
+      <em>Vestigia</em>, dal latino <em>vestigium</em>: l'impronta lasciata da un piede,
+      il segno che un passaggio incide nel luogo che attraversa. L'opera osserva un 
+      ambiente per la durata di un frammento di tempo: ogni presenza che vi transita lascia una
+      traccia semi-trasparente su un canvas che <strong>non si cancella mai</strong>,
+      fino a saturazione.
+    </p>
+    <p>
+      Il tempo, qui, non è una linea infinita — è un <strong>contenitore finito</strong>
+      che i nostri corpi riempiono e plasmano, passaggio dopo passaggio.
+    </p>
+  </section>
+ 
+  <section class="sezione-giorno">
+    <div class="titolo-sezione sans">MODALITÀ DIURNA — sfondo arancione, vestigia blu</div>
+    <h2 class="titolo-grande">Canvas di giorno</h2>
+    <div class="griglia" id="galleria-giorno"></div>
+  </section>
+ 
+  <section class="sezione-notte">
+    <div class="titolo-sezione sans">MODALITÀ NOTTURNA — sfondo blu, vestigia arancioni</div>
+    <h2 class="titolo-grande">Canvas di notte</h2>
+    <div class="griglia" id="galleria-notte"></div>
+  </section>
+ 
+  <section>
+    <div class="titolo-sezione sans">IL SISTEMA IN FUNZIONE</div>
+    <h2 class="titolo-grande">Registrazione dal vivo</h2>
+    <div class="schermata">
+      <h2>Sessione di monitoraggio — schermo registrato</h2>
+      <video controls>
+        <source src="media/Vestigia_processo.mp4" type="video/mp4">
+        Il tuo browser non supporta la riproduzione video.
+      </video>
+      <p class="nota-video">
+        Registrazione dello schermo durante una sessione reale: si osserva il canvas
+        accumulare le vestigia dei passaggi in tempo reale.
+      </p>
+    </div>
+  </section>
+ 
+  <footer>
+    <span>Vestigia — Nicolò Bulegato, 2026</span>
+    <span>Presentazione locale, uso offline</span>
+  </footer>
+ 
+  <div id="lightbox">
+    <button class="chiudi" aria-label="Chiudi">✕</button>
+    <img src="" alt="">
+  </div>
+ 
+<script>
+  // === MODIFICA QUESTE DUE LISTE CON I NOMI DEI TUOI FILE ===
+  // Metti i file immagine dentro una cartella chiamata "media"
+  // nella STESSA cartella di questo file HTML, poi scrivi qui
+  // sotto i nomi esatti dei file (con l'estensione, es. .jpg)
+ 
+  const immaginiGiorno = [
+    "vestigia_2026-09-11_17-59-37.jpg",
+  ];
+ 
+  const immaginiNotte = [
+    "vestigia_notte_2026-09-16_20-55-38.jpg",
+  ];
+ 
+  function riempiGalleria(idContenitore, listaFile, prefissoCartella) {
+    const contenitore = document.getElementById(idContenitore);
+    if (listaFile.length === 0) {
+      contenitore.innerHTML = '<p class="sans" style="color:#6b6b70">Nessuna immagine inserita ancora — aggiungi i nomi dei file nello script in fondo alla pagina.</p>';
+      return;
+    }
+    listaFile.forEach((nomeFile, indice) => {
+      const figura = document.createElement("figure");
+      const img = document.createElement("img");
+      img.src = prefissoCartella + nomeFile;
+      img.alt = "Canvas " + (indice + 1);
+      img.addEventListener("click", () => apriLightbox(img.src));
+      const didascalia = document.createElement("figcaption");
+      didascalia.textContent = nomeFile;
+      figura.appendChild(img);
+      figura.appendChild(didascalia);
+      contenitore.appendChild(figura);
+    });
+  }
+ 
+  riempiGalleria("galleria-giorno", immaginiGiorno, "media/");
+  riempiGalleria("galleria-notte", immaginiNotte, "media/");
+ 
+  // === LIGHTBOX: ingrandimento immagini ===
+  const lightbox = document.getElementById("lightbox");
+  const lightboxImg = lightbox.querySelector("img");
+  const lightboxChiudi = lightbox.querySelector(".chiudi");
+ 
+  function apriLightbox(src) {
+    lightboxImg.src = src;
+    lightbox.classList.add("aperto");
+  }
+ 
+  function chiudiLightbox() {
+    lightbox.classList.remove("aperto");
+  }
+ 
+  lightboxChiudi.addEventListener("click", chiudiLightbox);
+ 
+  // Click fuori dall'immagine (sullo sfondo scuro) chiude il lightbox
+  lightbox.addEventListener("click", (evento) => {
+    if (evento.target === lightbox) chiudiLightbox();
+  });
+ 
+  // Tasto Escape chiude il lightbox
+  document.addEventListener("keydown", (evento) => {
+    if (evento.key === "Escape") chiudiLightbox();
+  });
+ 
+  // === CURSORE OMBRA (solo per mouse/desktop, mai su touch) ===
+  if (window.matchMedia("(pointer: fine)").matches) {
+    document.body.classList.add("cursore-personalizzato");
+ 
+    const ombra = document.createElement("div");
+    ombra.id = "cursore-ombra";
+    document.body.appendChild(ombra);
+ 
+    document.addEventListener("mousemove", (evento) => {
+      ombra.classList.add("attivo");
+      ombra.style.left = evento.clientX + "px";
+      ombra.style.top = evento.clientY + "px";
+    });
+ 
+    document.addEventListener("mouseleave", () => {
+      ombra.classList.remove("attivo");
+    });
+ 
+    // Si ingrandisce sopra qualsiasi elemento cliccabile
+    const selettoreCliccabili = "a, button, video, .griglia figure, input, textarea, select, [onclick], [role='button']";
+ 
+    document.querySelectorAll(selettoreCliccabili).forEach((elemento) => {
+      elemento.addEventListener("mouseenter", () => ombra.classList.add("grande"));
+      elemento.addEventListener("mouseleave", () => ombra.classList.remove("grande"));
+    });
+  }
+</script>
+ 
+</body>
+</html>
